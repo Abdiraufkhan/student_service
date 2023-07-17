@@ -13,6 +13,7 @@ class UserService {
   public async getAll() {
     return this.repo.getAll();
   }
+  
 }
 
 export default UserService;

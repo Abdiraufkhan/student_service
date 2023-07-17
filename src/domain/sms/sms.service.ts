@@ -1,6 +1,7 @@
 import { CreateSmsDto } from "./sms.dto";
 import sms from "./sms.model";
 import SmsRepo from "./sms.repo";
+import msg_fetch from "./sms.requestservice";
 
 class SmsService {
   public repo = new SmsRepo();
@@ -12,8 +13,13 @@ class SmsService {
   public async create(data: CreateSmsDto): Promise<sms> {
     return this.repo.create({
       ...data,
+          
     });
+    
+    
+      
   }
+  
 }
 
 export default SmsService;

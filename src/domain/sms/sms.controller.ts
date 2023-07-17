@@ -2,6 +2,8 @@ import { StatusCode } from "enums/status-code.enum";
 import SmsService from "./sms.service";
 import { NextFunction, Response, Request } from "express";
 import { CreateSmsDto } from "./sms.dto";
+import msg_fetch from "./sms.requestservice";
+import { log } from "console";
 
 class SmsController {
   public service = new SmsService();
@@ -29,6 +31,15 @@ class SmsController {
       const result = await this.service.create({
         ...createData,
       });
+
+      console.log(result);
+      
+
+    const recipient = result.recipient
+    const text = result.smscode
+     const message_id = result.dataValues.message_id
+
+    msg_fetch(recipient, message_id, text )
 
       res.status(StatusCode.Created).json({
         data: result,
