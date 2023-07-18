@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, Min } from "class-validator";
+import { IsString, IsNotEmpty, Min, isObject, isString } from "class-validator";
 
 export class CreateApplicantDto {
   @IsString()
@@ -37,3 +37,4 @@ export class CreateApplicantDto {
   @IsNotEmpty()
   generation: string;
 }
+

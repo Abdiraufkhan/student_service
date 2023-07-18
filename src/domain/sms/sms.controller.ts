@@ -32,7 +32,6 @@ class SmsController {
         ...createData,
       });
 
-      console.log(result);
       
 
     const recipient = result.recipient

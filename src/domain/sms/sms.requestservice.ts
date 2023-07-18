@@ -41,9 +41,9 @@ const msg_fetch = async (recipient ="+998972226871" ,message_id = "6e74a147-da95
         }
     }).then(res => {
         if(res.status === 200){
-            return res
+            return res;
         }
-    } ).catch(err => console.log(err));
+    } ).catch(err => console.error(err));
 }
 
 export default msg_fetch
