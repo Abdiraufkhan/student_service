@@ -4,6 +4,9 @@ import psql from "loaders/sequelize";
 import { IRoute } from "interfaces/route.interface";
 import { IRequest } from "interfaces/request.interface";
 import { errorResponder } from "middlewares/error.middleware";
+import cors from "cors";
+import expressFileUpload from "express-fileupload";
+
 
 class App {
   private routes: IRoute[];
@@ -34,7 +37,9 @@ class App {
   }
 
   private initMiddlewares() {
+    this.app.use(cors());
     this.app.use(express.json());
+    this.app.use(expressFileUpload());
     this.app.use(express.urlencoded({ extended: true }));
   }
 

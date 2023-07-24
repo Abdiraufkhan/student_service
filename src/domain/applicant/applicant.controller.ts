@@ -1,5 +1,5 @@
 import { StatusCode } from "enums/status-code.enum";
-import { NextFunction, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { IRequest } from "interfaces/request.interface";
 import { validation } from "utils/validation.util";
 import ApplicantService from "./applicant.service";
@@ -33,7 +33,7 @@ class ApplicantController {
     }
   };
 
-  public create = async (req: IRequest, res: Response, next: NextFunction) => {
+  public create = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const createData: CreateApplicantDto = req.body;
       await validation(CreateApplicantDto, createData);

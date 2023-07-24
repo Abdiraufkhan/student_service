@@ -13,10 +13,9 @@ import {
 import { CreateDateColumn, UpdateDateColumn } from "typeorm";
 @Table({
   timestamps: true,
-  schema: "qabul",
-  tableName: "applicant",
-  createdAt: false,
-  updatedAt: false,
+  schema: "applicant",
+  tableName:"applicants"
+  
 })
 class applicant extends Model {
   @IsUUID(4)
@@ -25,8 +24,7 @@ class applicant extends Model {
   @Column
   id: string;
 
-  @Column
-  email: string;
+  
 
   @Column
   father_name: string;
@@ -38,10 +36,40 @@ class applicant extends Model {
   last_name: string;
 
   @Column
+  birth_data: string;
+
+  @Column
+  gender: string;
+
+  @Column
+  citizenship: string;
+
+  @Column
+  nationality: string;
+
+  @Column
+  inregion: string;
+
+  @Column
+  indistrict: string;
+
+  @Column
+  inlive: string;
+
+  @Column
+  pasport_id: string;
+
+  @Column
+  pasport_from: string;
+
+  @Column
   mobile_phone: string;
 
   @Column
   phone: string;
+
+  @Column
+  email: string;
 
   @Column
   status: string;
@@ -53,27 +81,18 @@ class applicant extends Model {
   profile_photo_id: string;
 
   @Column
+  pasport_pdf_id: string;
+
+  @Column
+  transcript_pdf_id: string;
+
+  @Column
+  middle_college_pdf_id: string;
+
+  @Column
   generation: string;
 
-  @Column
-  status_applicant: string;
 
-  @Column
-  student_id_number: string;
-
-  @CreatedAt
-  @Column({
-    type: DataType.Date,
-    defaultValue: DataType.NOW,
-  })
-  created_at: Date;
-
-  @UpdatedAt
-  @Column({
-    type: DataType.Date,
-    defaultValue: DataType.NOW,
-  })
-  updated_at: Date;
 }
 
 export default applicant;
