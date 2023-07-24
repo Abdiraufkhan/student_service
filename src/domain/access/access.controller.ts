@@ -3,10 +3,12 @@ import { NextFunction, Request, Response } from "express";
 import AccessService from "./access.service";
 import msg_fetch from "domain/sms/sms.requestservice";
 import SecurityService from "domain/security/security.service";
+import ApplicantService from "domain/applicant/applicant.service";
 
 class AccessController {
   public service = new AccessService();
   public service2 = new SecurityService();
+  public service3 = new ApplicantService();
 
   public create = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -46,14 +48,28 @@ class AccessController {
       const result = await this.service.verifysmscode(message_id, smscode);
       const recipient = await this.service.recipientByMessage_id(message_id);
 
-      if (result == true) {
+      const phone: string = recipient
+
+      const define = await this.service3.define(phone);
+      
+
+      if (result && define === "newApplicant" ) {
+
         const data = await this.service2.register({ smscode, recipient });
 
         res.status(StatusCode.Ok).json({
           data: data,
-          message: "Success",
+          message: "New Applicant",
         });
-      } else {
+      } else if(result && define === "oldApplicant"){
+        const data = await this.service2.register({ smscode, recipient });
+
+        res.status(StatusCode.Ok).json({
+          data: data,
+          message: "Old Applicant",
+        });      
+      }
+       else {
         res.status(StatusCode.UnprocessableEntity).json({
           message: "Notog'ri kod",
         });

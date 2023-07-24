@@ -9,7 +9,7 @@ class PhotoUploadController {
     public upload = async (req, res, next) => {
         try {
             const file = req.files?.file;
-            console.log(req.files?.file);
+            
             
             if (!file) throw new BadRequestError(ErrorMessage.FileRequired);
 

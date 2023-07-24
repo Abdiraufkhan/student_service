@@ -92,6 +92,20 @@ class applicant extends Model {
   @Column
   generation: string;
 
+  @Column
+  from_university: string;
+
+  @Column
+  which_branch: string;
+
+  @Column
+  middle_college: string;
+
+  @Column
+  our_branch: string;
+
+  @Column
+  education_type: string;
 
 }
 

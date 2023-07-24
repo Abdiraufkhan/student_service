@@ -2,6 +2,7 @@ import { CreateTokenDto } from "./security.dto";
 import bcrypt from "bcrypt";
 import { sign, verify } from "jsonwebtoken";
 import SecurityRepo from "./Security.repo";
+import { IPayload } from "interfaces/payload.interface";
 
 class SecurityService {
     public repo = new SecurityRepo();
@@ -10,8 +11,6 @@ class SecurityService {
     public async register(data: CreateTokenDto): Promise<string> {
         const { recipient, smscode } = data;
 
-        // let user = await this.repo.getByEmail(email);
-        // if (user) throw new ConflictError(ErrorMessage.EmailAlreadyTaken);
 
         const hash = await this.generateHash(smscode);
 
@@ -21,7 +20,7 @@ class SecurityService {
         });
         delete newUser.smscode;
 
-        const payload: CreateTokenDto = {
+        const payload: IPayload = {
             ...newUser,
         };
 
@@ -40,7 +39,7 @@ class SecurityService {
         return bcrypt.compare(smscode, hash);
     }
 
-    private generateJWT(payload: CreateTokenDto): string {
+    private generateJWT(payload: IPayload): string {
         return sign(payload, process.env.ACCESS_TOKEN_SECRET);
     }
 

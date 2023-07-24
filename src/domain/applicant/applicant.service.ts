@@ -19,6 +19,11 @@ class ApplicantService {
   public async create(data: CreateApplicantDto): Promise<Applicant> {
     return this.repo.create(data);
   }
+
+  public async define(phone: string): Promise<string> {
+    return this. repo.defineNumber(phone)
+  }
+
 }
 
 export default ApplicantService;

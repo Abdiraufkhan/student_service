@@ -1,7 +1,6 @@
 import { Router } from "express";
-import { checkMiddleware } from "middlewares/check.middleware";
-import PostController from "./applicant.controller";
 import ApplicantController from "./applicant.controller";
+import { checkMiddleware } from "middlewares/check.middleware";
 
 class ApplicantRoute {
   public path = "/applicants";
@@ -13,7 +12,7 @@ class ApplicantRoute {
   }
 
   private initRoutes() {
-    this.router.get("/", this.controller.getAll);
+    this.router.get("/",checkMiddleware, this.controller.getAll);
     this.router.get("/:id", this.controller.getById);
     this.router.post("/", this.controller.create);
   }

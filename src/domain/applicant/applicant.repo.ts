@@ -1,6 +1,4 @@
-import User from "domain/user/user.model";
 import { CreateApplicantDto } from "./applicant.dto";
-import Post from "./applicant.model";
 import Applicant from "./applicant.model";
 
 class ApplicantRepo {
@@ -22,6 +20,30 @@ class ApplicantRepo {
       ...data,
     });
   }
+
+  public async defineNumber(phone: string): Promise<string> {
+    try {
+      // Check if a row with the provided phone number exists in the database
+      const existingApplicant = await Applicant.findOne({
+        where: {
+          phone: phone,
+        },
+        raw: true, // Return plain JSON object instead of model instance
+      });
+
+      if (existingApplicant ) {
+        // If a matching row is found, return its id
+        return "oldApplicant";
+      } else {
+        // If no matching row is found, return "newApplicant"
+        return "newApplicant";
+      }
+    } catch (error) {
+      // Handle any potential errors here
+      throw new Error("Error while querying the database: " + error.message);
+    }
+  }
+
 }
 
 export default ApplicantRepo;
